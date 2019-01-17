@@ -1,0 +1,342 @@
+{
+ pages: [
+  {
+   name: "First_page",
+   elements: [
+    {
+     type: "text",
+     name: "user_name",
+     title: "Your Name: "
+    },
+    {
+     type: "text",
+     name: "user_brand",
+     title: "which brand you represent: "
+    }
+   ]
+  },
+  {
+   name: "Basic Details",
+   elements: [
+    {
+     type: "checkbox",
+     name: "platform_selector",
+     title: "Which platforms will you be integrating the Braze SDK with?",
+     choices: [
+      {
+       value: "web",
+       text: "Web "
+      },
+      {
+       value: "ios_native",
+       text: "iOS Native"
+      },
+      {
+       value: "android_native",
+       text: "Android Native"
+      },
+      {
+       value: "android_cordova",
+       text: "Cordova Android"
+      },
+      {
+       value: "ios_cordova",
+       text: "Cordova iOS"
+      },
+      {
+       value: "fire_os",
+       text: "Fire OS"
+      },
+      {
+       value: "android_react",
+       text: "React Android"
+      },
+      {
+       value: "ios_react",
+       text: "React iOS"
+      },
+      {
+       value: "tv_os",
+       text: "tvOS "
+      }
+     ],
+     colCount: 4
+    },
+    {
+     type: "checkbox",
+     name: "channel_selector",
+     title: "Which message channels will you be utilizing with Braze?",
+     choices: [
+      {
+       value: "mobile_push",
+       text: "iOS/Android Push"
+      },
+      {
+       value: "web_push",
+       text: "Web Push"
+      },
+      {
+       value: "in_app_messaging",
+       text: "In-App Messaging"
+      },
+      {
+       value: "in_browser_messaging",
+       text: "In-Browser Messaging "
+      },
+      {
+       value: "email",
+       text: "Email"
+      },
+      {
+       value: "webhooks",
+       text: "Webhooks "
+      },
+      {
+       value: "cards",
+       text: "Newsfeed Cards"
+      }
+     ],
+     colCount: 3
+    },
+    {
+     type: "radiogroup",
+     name: "cdp_integration",
+     title: "Will you be integrating Braze into your Customer Data Platform (e.g. mParticle, Segment)?",
+     choices: [
+      {
+       value: "yes",
+       text: "Yes"
+      },
+      {
+       value: "no",
+       text: "No"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   name: "iOS Details",
+   elements: [
+    {
+     type: "radiogroup",
+     name: "ios_dependency_manager",
+     title: "Which iOS dependency manager will you be using to integrate Braze?",
+     choices: [
+      {
+       value: "cocoapods",
+       text: "Cocoapods"
+      },
+      {
+       value: "carthage",
+       text: "Carthage"
+      },
+      {
+       value: "manual",
+       text: "None, I am manually integrating (not recommended) "
+      }
+     ]
+    },
+    {
+     type: "radiogroup",
+     name: "ios_rich_push",
+     title: "Will you be using Rich Push notifications (large image within push notification)?",
+     choices: [
+      {
+       value: "yes",
+       text: "Yes"
+      },
+      {
+       value: "no",
+       text: "No"
+      }
+     ]
+    }
+   ],
+   visibleIf: "{p1_platform_checkbox} contains \"ios\"  and {p1_cdp_radio} = \"item2\""
+  },
+  {
+   name: "Push Details",
+   elements: [
+    {
+     type: "radiogroup",
+     name: "push_token_migration",
+     title: "Will you be migrating push tokens over from an existing provider?",
+     choices: [
+      {
+       value: "yes",
+       text: "Yes"
+      },
+      {
+       value: "no",
+       text: "No"
+      }
+     ]
+    }
+   ],
+   visibleIf: "{channel_selector} contains \"web_push\" or {channel_selector} contains \"mobile_push\""
+  },
+  {
+   name: "Web Details",
+   elements: [
+    {
+     type: "radiogroup",
+     name: "web_integration_type",
+     title: "How will you be integrating the web SDK?",
+     choices: [
+      {
+       value: "standard",
+       text: "Standard inclusion of Braze's script tag"
+      },
+      {
+       value: "gtm",
+       text: "Google Tag Manager"
+      },
+      {
+       value: "requirejs",
+       text: "RequireJS"
+      },
+      {
+       value: "npm",
+       text: "NPM "
+      },
+      {
+       value: "bower",
+       text: "Bower"
+      }
+     ]
+    },
+    {
+     type: "radiogroup",
+     name: "web_initialization_time",
+     title: "When will the web SDK be initialized on your site?",
+     choices: [
+      {
+       value: "init_on_load",
+       text: "Every Page (recommended)"
+      },
+      {
+       value: "init_on_log_in",
+       text: "Only upon user log in "
+      },
+      {
+       value: "init_other",
+       text: "Other "
+      }
+     ]
+    },
+    {
+     type: "comment",
+     name: "web_initialization_time_other",
+     visibleIf: "{web_initialization_time} = \"init_other\"",
+     title: "Please describe at what point you will initialize the web SDK on your site "
+    }
+   ],
+   visibleIf: "{platform_selector} contains \"web\""
+  },
+  {
+   name: "CDP Details",
+   elements: [
+    {
+     type: "radiogroup",
+     name: "cdp_which",
+     visible: false,
+     visibleIf: "{cdp_integration} = \"yes\"",
+     title: "Which Customer Data Platform do you plan on integrating Braze with?",
+     choices: [
+      {
+       value: "mparticle",
+       text: "mParticle"
+      },
+      {
+       value: "segment",
+       text: "Segment"
+      }
+     ]
+    },
+    {
+     type: "radiogroup",
+     name: "cdp_mparticle_integration",
+     visibleIf: "{cdp_which} = \"mparticle\"",
+     title: "Do you plan to use mParticle's Kit integration?",
+     choices: [
+      {
+       value: "yes",
+       text: "Yes"
+      },
+      {
+       value: "no",
+       text: "No - I'll be opting for the server to server integration and not initializing Braze's SDK"
+      }
+     ]
+    },
+    {
+     type: "radiogroup",
+     name: "cdp_mparticle_audiences",
+     visibleIf: "{cdp_which} = \"mparticle\"",
+     title: "Do you plan to sync mParticle audiences to braze",
+     choices: [
+      {
+       value: "yes",
+       text: "Yes"
+      },
+      {
+       value: "no",
+       text: "No"
+      }
+     ]
+    },
+    {
+     type: "radiogroup",
+     name: "cdp_segment_integration",
+     visibleIf: "{cdp_which} = \"segment\"",
+     title: "Do you plan to use Segment's side by side integration?",
+     choices: [
+      {
+       value: "yes",
+       text: "Yes"
+      },
+      {
+       value: "no",
+       text: "No - I'll be opting for the server to server integration and not initializing Braze's SDK"
+      }
+     ]
+    },
+    {
+     type: "radiogroup",
+     name: "cdp_segment_personas",
+     visibleIf: "{cdp_which} = \"segment\"",
+     title: "Do you plan to sync Segment Persona groups to Braze?",
+     choices: [
+      {
+       value: "yes",
+       text: "Yes"
+      },
+      {
+       value: "no",
+       text: "No"
+      }
+     ]
+    },
+    {
+     type: "radiogroup",
+     name: "cdp_segment_replay",
+     visibleIf: "{cdp_which} = \"segment\"",
+     title: "Do you plan to sync historical user data from Segment -> Braze (Segment's REPLAY feature) ? ",
+     choices: [
+      {
+       value: "yes",
+       text: "Yes"
+      },
+      {
+       value: "no",
+       text: "No"
+      }
+     ]
+    }
+   ],
+   visibleIf: "{cdp_integration} = \"yes\""
+  }
+ ],
+ showQuestionNumbers: "off"
+}
