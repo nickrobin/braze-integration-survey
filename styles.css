@@ -1,0 +1,16 @@
+.btn.sv_next_btn {
+    background-color: #27368f;
+    color: white;
+}
+
+.btn.sv_prev_btn {
+  background-color: #c6c6c6;
+}
+
+.btn.sv_complete_btn {
+  background-color: #33c699;
+}
+
+.sv_main span {
+  font-weight: 300;
+}
